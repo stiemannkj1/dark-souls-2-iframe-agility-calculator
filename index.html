@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
 The MIT License (MIT)
 
@@ -21,72 +22,102 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<html>
-	<head>
-		<title>DS2 iFrame Calculator</title>
-		<script type="text/javascript" src="./index.js"></script>
-		<style>
-			.hidden {
-				display: none;
-			}
+<html lang="en-us">
 
-			input {
-				width: 23px;
-			}
-		</style>
-	</head>
-	<body>
-		<h1>Dark Souls 2 iFrame (Agility) Calculator</h1>
-		<label for="adapt">Adaptability:</label>
-		<br />
-		<button onclick="index.decrement('adapt', index.ADAPT_MIN);">-</button>
-		<input id="adapt" maxlength="2" onchange="index.validate(this, index.ADAPT_MIN);"
-			onfocus="this.oldValue = this.value;" type="text" value="3" />
-		<button onclick="index.increment('adapt');">+</button>
-		<span id="adapt_error" class="hidden">
-			<span id="adapt_error_value"></span> is not a valid value for Adaptability.
-		</span>
-		<br />
-		<label for="attune">Attunement:</label>
-		<br />
-		<button onclick="index.decrement('attune', index.ATTUNE_MIN);">-</button>
-		<input id="attune" maxlength="2" onchange="index.validate(this, index.ATTUNE_MIN);"
-			onfocus="this.oldValue = this.value;" type="text" value="2" />
-		<button onclick="index.increment('attune');">+</button>
-		<span id="attune_error" class="hidden">
-			<span id="attune_error_value"></span> is not a valid value for Attunement.
-		</span>
-		<br />
-		<button onclick="outputAgilityAndIFrames()">Calculate Agility</button>
-		<div>
-			Agility<sup>[<a href="#footnote_1">1</a>]</sup>: <span id="agility"></span>
-		</div>
-		<div>
-			Fast Roll iFrames<sup>[<a href="#footnote_2">2</a>]</sup>: <span id="roll_iframes"></span>
-		</div>
-		<div>
-			Backstep iFrames<sup>[<a href="#footnote_3">3</a>]</sup>: <span id="backstep_iframes"></span>
-		</div>
-		<ol>
-			<li id="footnote_1">The algorithm used to calculate agility is from <a href="http://darksouls2.wikidot.com/agility#toc2" target="_blank">the Dark Souls 2 Wikidot <em>Agility Article</em></a>.</li>
-			<li id="footnote_2">The values used to calculate fast roll iFrames come from <a href="https://www.reddit.com/user/vageta311" target="_blank">vegeta311</a>'s <a href="https://www.reddit.com/r/DarkSouls2/comments/25lnny/agility_and_iframe_correlation_data/" target="_blank"><em>Agility and iFrame correlation data.</em> reddit post</a>.</li>
-			<li id="footnote_3">The values used to calculate backstep iFrames come from <a href="http://darksouls2.wikidot.com/agility#toc2" target="_blank">the Dark Souls 2 Wikidot <em>Agility</em> Article</a>.</li>
-		</ol>
-		<div>All content is republished here for non-profit educational purposes.</div>
-		<script type="text/javascript">
-			function outputAgilityAndIFrames() {
+<head>
+	<title>DS2 iFrame Calculator</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-				var AGILITY = index.calculateAgility('adapt', 'attune'),
-					ROLL_IFRAMES = index.getRollIFrames(AGILITY),
-					BACKSTEP_IFRAMES = index.getBackstepIFrames(AGILITY),
-					agilitySpan = document.getElementById('agility'),
-					rollIFramesSpan = document.getElementById('roll_iframes'),
-					backstepIFramesSpan = document.getElementById('backstep_iframes');
+	<!-- Enable responsiveness on mobile devices-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-				agilitySpan.innerHTML = AGILITY;
-				rollIFramesSpan.innerHTML = ROLL_IFRAMES;
-				backstepIFramesSpan.innerHTML = BACKSTEP_IFRAMES;
-			}
-		</script>
-	</body>
+	<script type="text/javascript" src="./index.js"></script>
+	<link rel="stylesheet" href="./blackdoc.css"></link>
+</head>
+
+<body>
+	<div class="content container">
+		<div class="page">
+			<h1 class="page-title">Dark Souls 2 iFrame (Agility) Calculator</h1>
+			<div class="centered-calc">
+				<div>
+					<label for="adapt">Adaptability:</label>
+				</div>
+				<div>
+					<button class="btn" onclick="index.decrement('adapt', index.ADAPT_MIN);">-</button>
+					<input id="adapt" maxlength="2" onchange="index.validate(this, index.ADAPT_MIN);" onfocus="this.oldValue = this.value;" type="text" value="3" />
+					<script type="text/javascript">
+						document.getElementById('adapt').focus();
+					</script>
+					<button class="btn" onclick="index.increment('adapt');">+</button>
+					<span id="adapt_error" class="hidden">
+						<span id="adapt_error_value"></span> is not a valid value for Adaptability.
+					</span>
+				</div>
+				<div>
+					<label for="attune">Attunement:</label>
+				</div>
+				<div>
+					<button class="btn" onclick="index.decrement('attune', index.ATTUNE_MIN);">-</button>
+					<input id="attune" maxlength="2" onchange="index.validate(this, index.ATTUNE_MIN);" onfocus="this.oldValue = this.value;" type="text" value="2" />
+					<button class="btn" onclick="index.increment('attune');">+</button>
+					<span id="attune_error" class="hidden">
+						<span id="attune_error_value"></span> is not a valid value for Attunement.
+					</span>
+				</div>
+				<div>
+					<button class="btn" onclick="outputAgilityAndIFrames()">Calculate Agility</button>
+				</div>
+				<div>
+					Agility<sup>[<a href="#footnote_1">1</a>]</sup>=<code id="agility"></code>
+				</div>
+				<div>
+					Fast Roll iFrames<sup>[<a href="#footnote_2">2</a>]</sup>=<code id="roll_iframes"></code>
+				</div>
+				<div>
+					Backstep iFrames<sup>[<a href="#footnote_3">3</a>]</sup>=<code id="backstep_iframes"></code>
+				</div>
+				<script type="text/javascript">
+					function outputAgilityAndIFrames() {
+
+						var AGILITY = index.calculateAgility('adapt', 'attune'),
+							ROLL_IFRAMES = index.getRollIFrames(AGILITY),
+							BACKSTEP_IFRAMES = index.getBackstepIFrames(AGILITY),
+							agilitySpan = document.getElementById('agility'),
+							rollIFramesSpan = document.getElementById('roll_iframes'),
+							backstepIFramesSpan = document.getElementById('backstep_iframes');
+
+						agilitySpan.innerHTML = AGILITY;
+						rollIFramesSpan.innerHTML = ROLL_IFRAMES;
+						backstepIFramesSpan.innerHTML = BACKSTEP_IFRAMES;
+					}
+
+					outputAgilityAndIFrames();
+				</script>
+			</div>
+			<div class="footer">
+				<div class="centered-medium">
+					<div>Created by <a href="http://stiemannkj1.github.io/about/">Kyle Stiemann</a> (<a href="https://github.com/stiemannkj1">@stiemannkj1</a>).</div>
+					<div class="centered-buttons">
+						<iframe src="https://ghbtns.com/github-btn.html?user=stiemannkj1&repo=dark-souls-2-iframe-agility-calculator&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+						<iframe src="https://ghbtns.com/github-btn.html?user=stiemannkj1&repo=dark-souls-2-iframe-agility-calculator&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+					</div>
+				</div>
+				<hr />
+				<div class="small-font">
+					<ol>
+						<li id="footnote_1">The algorithm used to calculate agility is from <a href="http://darksouls2.wikidot.com/agility#toc2" target="_blank">the Dark Souls 2 Wikidot <em>Agility Article</em></a>.</li>
+						<li id="footnote_2">The values used to calculate fast roll iFrames come from <a href="https://www.reddit.com/user/vageta311" target="_blank">vegeta311</a>'s <a href="https://www.reddit.com/r/DarkSouls2/comments/25lnny/agility_and_iframe_correlation_data/" target="_blank"><em>Agility and iFrame correlation data.</em> reddit post</a>.</li>
+						<li id="footnote_3">The values used to calculate backstep iFrames come from <a href="http://darksouls2.wikidot.com/agility#toc2" target="_blank">the Dark Souls 2 Wikidot <em>Agility</em> Article</a>.</li>
+					</ol>
+					<div>All copyrighted content is published here under fair use for non-profit educational purposes.</div>
+					This site uses a modified version of the <a href="https://github.com/karloespiritu/BlackDoc">BlackDoc Theme</a> by <a href="http://karloespiritu.com/">Karlo Espiritu</a> (<a href="https://github.com/karloespiritu">@karloespiritu</a>).
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>
+
