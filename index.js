@@ -136,7 +136,7 @@ var index = {
 	validate: function(input, MIN) {
 
 		var INPUT_ID = input.id;
-		var validationRegExp = new RegExp("^[0-9]?[" + MIN + "-9]$");
+		var validationRegExp = new RegExp("^[1-9][0-9]|[0]?[" + MIN + "-9]$");
 
 		if (validationRegExp.test(input.value)) {
 			document.getElementById(INPUT_ID + '_error').className = 'hidden';
